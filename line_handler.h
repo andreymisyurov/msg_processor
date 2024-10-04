@@ -1,7 +1,9 @@
 #ifndef LINE_HANDLER_H
 #define LINE_HANDLER_H
 
-void handle_line(const char* line);
+#include "file_parser.h"
+
+void* handle_line(const char* line, DataUnit* value);
 
 #endif
 
