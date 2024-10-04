@@ -16,18 +16,6 @@ uint32_t hex_to_uint32(const char* hex_str) {
     return (uint32_t)strtol(hex_str, NULL, 16);
 }
 
-void print_line(const DataUnit* line) {
-    printf("Message processed:\n");
-    printf(" Type: %02X\n", line->msg.type);
-    printf(" Length: %02X\n", line->msg.length);
-    printf(" Payload: ");
-    for (int i = 0; i < line->msg.length; i++)
-        printf("%02X ", line->msg.payload[i]);
-    printf("\n");
-    printf(" CRC-32: %08X\n", line->msg.crc32);
-    printf(" Mask: %08X\n", line->mask);
-}
-
 void* handle_line(const char* line, DataUnit* value) {
     regex_t message_regex, mask_regex;
     regmatch_t pmatch[2];
