@@ -7,7 +7,7 @@
 #define BUFFER_LEN 1024
 #define CAPACITY_MAX 128
 
-typedef void* (*line_handler_func)(const char* line, DataUnit* value);
+typedef int (*line_handler_func)(const char* line, DataUnit* value);
 
 int parse_file(const char* filename, line_handler_func handler);
 void print_line(const DataUnit* line);

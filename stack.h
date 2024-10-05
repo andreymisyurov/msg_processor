@@ -25,9 +25,9 @@ typedef struct Stack {
     int size;
 } Stack;
 
-void init_stack(Stack* stack);
-void push(Stack* stack, DataUnit* element);
-DataUnit* pop(Stack* stack);
-void free_stack(Stack* stack);
+Stack* get_stack_instance(void);
+void push(DataUnit* element);
+DataUnit* pop();
+void free_stack();
 
 #endif

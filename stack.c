@@ -2,12 +2,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void init_stack(Stack* stack) {
-    stack->top = NULL;
-    stack->size = 0;
+static Stack* stack_instance = NULL;
+
+Stack* get_stack_instance(void) {
+    if (stack_instance == NULL) {
+        stack_instance = (Stack*)malloc(sizeof(Stack));
+        if (!stack_instance) {
+            printf("error: Memory allocation failed for stack.\n");
+            exit(EXIT_FAILURE);
+        }
+        stack_instance->top = NULL;
+        stack_instance->size = 0;
+    }
+    return stack_instance;
 }
 
-void push(Stack* stack, DataUnit* elem) {
+void push(DataUnit* elem) {
+    Stack* stack = get_stack_instance();
     Node* new_node = (Node*)malloc(sizeof(Node));
     if (!new_node) {
         printf("error: Memory allocation failed.\n");
@@ -28,9 +39,10 @@ void push(Stack* stack, DataUnit* elem) {
 }
 
 // Allocate memory. Should clean up return value
-DataUnit* pop(Stack* stack) {
+DataUnit* pop(void) {
+    Stack* stack = get_stack_instance();
     if (stack->size == 0) {
-        printf("error: Stack underflow.\n");
+        printf("warn: Stack underflow.\n");
         return NULL;
     }
 
@@ -40,13 +52,14 @@ DataUnit* pop(Stack* stack) {
     stack->top = node_to_pop->next;
     free(node_to_pop);
 
-    stack->size--;
+    --(stack->size);
     return unit;
 }
 
-void free_stack(Stack* stack) {
+void free_stack(void) {
+    Stack* stack = get_stack_instance();
     while (stack->size > 0) {
-        DataUnit* unit = pop(stack);
+        DataUnit* unit = pop();
         free(unit);
     }
 }
