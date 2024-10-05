@@ -62,4 +62,6 @@ void free_stack(void) {
         DataUnit* unit = pop();
         free(unit);
     }
+    free(stack_instance);
+    stack_instance = NULL;
 }
