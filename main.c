@@ -41,8 +41,10 @@ int main() {
         printf("error: CRC-32 mismatch! Possible data corruption.\n");
         exit(EXIT_FAILURE);
     }
-    
-    // add_padding(get_stack_instance()->top->unit);
+
+    add_padding(get_stack_instance()->top->unit);
+
+    apply_mask_to_tetrads(get_stack_instance()->top->unit);
 
     print_top_elem();
 

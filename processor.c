@@ -1,4 +1,5 @@
 #include "processor.h"
+#include <assert.h>
 #include <stdio.h>
 #include <zlib.h>
 
@@ -36,3 +37,17 @@ uint32_t calculate_crc32(const uint8_t *data, unsigned length) {
     return ~crc;
 }
 
+void apply_mask_to_tetrads(DataUnit* data_unit) {
+    MaskUnion mask;
+    mask.mask_value = data_unit->mask;
+    assert(data_unit->msg.length % 4 == 0);
+    unsigned num_tetrads = data_unit->msg.length / 4;
+
+    for (unsigned t = 0; t < num_tetrads; ++t) {
+        if (t % 2 == 0) {
+            for (unsigned b = 0; b < 4; ++b) {
+                data_unit->msg.payload[t * 4 + b] ^= mask.mask_bytes[b];
+            }
+        }
+    }
+}
