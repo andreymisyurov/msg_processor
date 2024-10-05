@@ -4,14 +4,16 @@
 #include "stack.h"
 #include <stdbool.h>
 
+#define POLYNOMIAL 0x04C11DB7
+
 typedef union {
-    uint32_t mask_value;  // 32-битная маска
-    uint8_t mask_bytes[4]; // 4 байта маски
+    uint32_t mask_value;
+    uint8_t mask_bytes[4];
 } MaskUnion;
 
-void add_padding(DataUnit* data_unit);
 uint32_t calculate_crc32(const uint8_t *data, unsigned length);
-bool cmp_crc32(DataUnit* data_unit);
+bool cmp_crc32(const DataUnit* data_unit);
+void add_padding(DataUnit* data_unit);
 void apply_mask_to_tetrads(DataUnit* data_unit);
 
 #endif

@@ -1,0 +1,7 @@
+Message type: 01
+Initial length: 0A
+Initial CRC-32: 62B1A5F1
+Initial data bytes: 00 11 22 33 44 55 66 77 88 99 
+Modified length: 0C
+Modified CRC-32: ECC94674
+Modified data bytes with mask: FF EE DD CC 44 55 66 77 77 66 FF FF 

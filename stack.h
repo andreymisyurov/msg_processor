@@ -27,7 +27,7 @@ typedef struct Stack {
 
 Stack* get_stack_instance(void);
 void push(DataUnit* element);
-DataUnit* pop();
-void free_stack();
+DataUnit* pop(void);
+void free_stack(void);
 
 #endif
