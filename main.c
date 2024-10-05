@@ -1,5 +1,6 @@
 #include "file_parser.h"
 #include "line_handler.h"
+#include "processor.h"
 #include "stack.h"
 
 #include <stdio.h>
@@ -22,6 +23,8 @@ int main() {
         printf("error: processing\n");
         return -1;
     }
+
+    add_padding(get_stack_instance()->top->unit);
 
     print_top_elem();
 
